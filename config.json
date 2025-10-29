@@ -1,0 +1,14 @@
+{
+  "documents": [
+    {"id":"cert_nastere","deps":[]},
+    {"id":"chitanta_taxa","deps":[]},
+    {"id":"pasaport","deps":["cert_nastere","chitanta_taxa"]}
+  ],
+  "offices": [
+    {"id":"O1","name":"Stare Civila","emits":["cert_nastere"],"counters":1},
+    {"id":"O2","name":"Taxe","emits":["chitanta_taxa"],"counters":2},
+    {"id":"O3","name":"Pasapoarte","emits":["pasaport"],"counters":2}
+  ],
+  "breaks": {"everySec":20, "minSec":5, "maxSec":10},
+  "clients": {"count":10, "targets":["pasaport"], "arrivalMs":{"min":200,"max":600}}
+}

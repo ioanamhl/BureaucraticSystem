@@ -1,13 +1,10 @@
 package org.example;
 
-/**
- * Hello world!
- *
- */
-public class App 
-{
-    public static void main( String[] args )
-    {
-        System.out.println( "Hello World!" );
+import organizare.*;
+
+public class App {
+    public static void main(String[] args) throws Exception {
+        Configuration cfg = ConfigurationLoader.load("config.json");
+        new Simulare(cfg).ruleaza();
     }
 }

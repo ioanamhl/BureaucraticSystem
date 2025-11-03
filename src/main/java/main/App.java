@@ -1,5 +1,6 @@
-package org.example;
+package main;
 
+import config.Configuration;
 import organizare.*;
 
 public class App {

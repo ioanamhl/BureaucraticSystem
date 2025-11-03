@@ -1,4 +1,5 @@
-package organizare;
+package config;
+
 import java.util.List;
 public class Configuration {
     public List<Document> documents;

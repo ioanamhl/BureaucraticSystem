@@ -1,6 +1,8 @@
 package organizare;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import config.Configuration;
+
 import java.io.File; import java.util.*;
 
 public class ConfigurationLoader {

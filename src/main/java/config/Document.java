@@ -1,4 +1,4 @@
-package organizare;
+package config;
 
 import java.util.List;
 

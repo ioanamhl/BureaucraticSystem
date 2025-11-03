@@ -1,5 +1,7 @@
 package organizare;
 
+import config.Configuration;
+
 import java.util.*;
 import java.util.concurrent.*;
 

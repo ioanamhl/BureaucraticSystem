@@ -1,4 +1,4 @@
-package organizare;
+package config;
 
 public class Clienti {
     public int count;

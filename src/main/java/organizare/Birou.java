@@ -14,7 +14,7 @@ public class Birou {
         this.id = id; this.emite = emite;
         this.pool = Executors.newFixedThreadPool(counters, r -> {
             Thread t = new Thread(r);
-            t.setName("Birou-"+id+"-worker");
+            t.setName("Ghiseu-"+id+"-angajat");
             return t;
         });
         for (int i=0;i<counters;i++) {

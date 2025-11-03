@@ -16,14 +16,19 @@ public class Ghiseu implements Runnable{
     public void setDeschis(boolean v) { deschis.set(v); }
     public boolean esteDeschis() { return deschis.get(); }
 
-    @Override public void run() {
+    @Override
+    public void run()
+    {
         try {
             while (!Thread.currentThread().isInterrupted()) {
-                if (!deschis.get()) { Thread.sleep(150); continue; }
-                Cerere c = coada.take();              // așteaptă următorul client
-                // simulează procesare
+                if (!deschis.get())
+                {
+                    Thread.sleep(150);
+                    continue;
+                }
+                Cerere c = coada.take();
                 Thread.sleep(ThreadLocalRandom.current().nextInt(200, 600));
-                c.gata.countDown();                   // livrează documentul
+                c.gata.countDown();
                 System.out.println(nume + " a servit " + c.clientId + " pentru " + c.docId);
             }
         } catch (InterruptedException e) {

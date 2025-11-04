@@ -10,5 +10,5 @@
     {"id":"O3","name":"Pasapoarte","emits":["pasaport"],"counters":2}
   ],
   "breaks": {"everySec":20, "minSec":5, "maxSec":10},
-  "clients": {"count":10, "targets":["pasaport"], "arrivalMs":{"min":200,"max":600}}
+  "clients": {"count":10, "targets":["pasaport"], "arrivalMs":{"min":0,"max":600}}
 }

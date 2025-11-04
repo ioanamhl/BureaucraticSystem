@@ -12,14 +12,22 @@ public class Client implements Runnable {
     private final Set<String> have = ConcurrentHashMap.newKeySet();
 
     public Client(String id, String tinta, Map<String, Birou> d2o, Map<String, Set<String>> deps) {
-        this.id = id; this.tinta = tinta; this.doc2birou = d2o; this.deps = deps;
+        this.id = id;
+        this.tinta = tinta;
+        this.doc2birou = d2o;
+        this.deps = deps;
     }
 
-    @Override public void run() {
+    @Override public void run()
+    {
         try {
             while (!have.contains(tinta)) {
                 String next = urmatorulEligibil();
-                if (next == null) { Thread.sleep(50); continue; }
+                if (next == null)
+                {
+                    Thread.sleep(50);
+                    continue;
+                }
                 Birou b = doc2birou.get(next);
                 CountDownLatch gata = new CountDownLatch(1);
                 b.coada.add(new Cerere(id, next, gata));
@@ -31,11 +39,16 @@ public class Client implements Runnable {
         } catch (InterruptedException e) { Thread.currentThread().interrupt(); }
     }
 
-    private String urmatorulEligibil() {
-        for (var e : deps.entrySet()) {
+    private String urmatorulEligibil()
+    {
+        for (Map.Entry<String, Set<String>> e : deps.entrySet())
+        {
             String doc = e.getKey();
-            if (have.contains(doc)) continue;
-            if (e.getValue().stream().allMatch(have::contains)) return doc;
+            Set<String> dep = e.getValue();
+
+            if (!have.contains(doc) && have.containsAll(dep)) {
+                return doc;
+            }
         }
         return null;
     }

@@ -10,13 +10,18 @@ public class Simulare {
     public Simulare(Configuration cfg) { this.cfg = cfg; }
 
     public void ruleaza() throws InterruptedException {
-        // mapări utile
+        // punem documenetele si dependentele fiecaruia in deps
         Map<String, Set<String>> deps = new HashMap<>();
-        for (var d : cfg.documents) deps.put(d.id, d.deps==null? Set.of() : new HashSet<>(d.deps));
-
+        for (var d : cfg.documents)
+            if (d.deps == null)
+                deps.put(d.id, Set.of());
+            else
+                deps.put(d.id, new HashSet<>(d.deps));
+        //dictionar cu documentul si biroul care il emite
         Map<String, Birou> doc2birou = new HashMap<>();
         List<Birou> birouri = new ArrayList<>();
         List<Ghiseu> toateGhiseele = new ArrayList<>();
+
         for (var o : cfg.offices) {
             Birou b = new Birou(o.id, new HashSet<>(o.emits), o.counters);
             birouri.add(b);
@@ -31,9 +36,13 @@ public class Simulare {
         }
 
         // clienți
-        ExecutorService poolClienti = Executors.newCachedThreadPool();
+        //ExecutorService poolClienti = Executors.newCachedThreadPool();
+        ExecutorService poolClienti = Executors.newFixedThreadPool(5);
         int n = cfg.clients.count;
-        int min = cfg.clients.arrivalMs.min, max = cfg.clients.arrivalMs.max;
+        //int min = cfg.clients.arrivalMs.min;
+        //int max = cfg.clients.arrivalMs.max;
+        int min=0;
+        int max=0;
         String[] targets = cfg.clients.targets;
 
         for (int i=1;i<=n;i++) {

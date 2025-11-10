@@ -10,11 +10,15 @@ public class Ghiseu implements Runnable{
     private final AtomicBoolean deschis = new AtomicBoolean(true);
     private final String nume;
 
-    public Ghiseu(String nume, BlockingQueue<Cerere> coada) {
-        this.nume = nume; this.coada = coada;
+    public Ghiseu(String nume, BlockingQueue<Cerere> coada)
+    {
+        this.nume = nume;
+        this.coada = coada;
     }
-    public void setDeschis(boolean v) { deschis.set(v); }
-    public boolean esteDeschis() { return deschis.get(); }
+    public void setDeschis(boolean v)
+    {
+        deschis.set(v);
+    }
 
     @Override
     public void run()

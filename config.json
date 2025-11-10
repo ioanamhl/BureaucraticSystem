@@ -2,13 +2,38 @@
   "documents": [
     {"id":"cert_nastere","deps":[]},
     {"id":"chitanta_taxa","deps":[]},
-    {"id":"pasaport","deps":["cert_nastere","chitanta_taxa"]}
+    {"id":"cazier_judiciar","deps":[]},
+    {"id":"adeverinta_medicala","deps":[]},
+
+    {"id":"buletin","deps":["cert_nastere","chitanta_taxa"]},
+    {"id":"rezidenta","deps":["buletin"]},
+    {"id":"eID","deps":["buletin","rezidenta"]},
+
+    {"id":"pasaport","deps":["buletin","cazier_judiciar","chitanta_taxa"]},
+
+    {"id":"permis_conducere","deps":["buletin","adeverinta_medicala","chitanta_taxa"]},
+    {"id":"polita_asigurare","deps":["buletin"]},
+    {"id":"inmatriculare_auto","deps":["permis_conducere","polita_asigurare","chitanta_taxa"]},
+
+    {"id":"numar_asigurari_sociale","deps":["cert_nastere"]},
+    {"id":"asigurare_sanatate","deps":["numar_asigurari_sociale","buletin"]}
   ],
   "offices": [
     {"id":"O1","name":"Stare Civila","emits":["cert_nastere"],"counters":1},
-    {"id":"O2","name":"Taxe","emits":["chitanta_taxa"],"counters":2},
-    {"id":"O3","name":"Pasapoarte","emits":["pasaport"],"counters":2}
+    {"id":"O2","name":"Taxe","emits":["chitanta_taxa"],"counters":3},
+    {"id":"O3","name":"Politie","emits":["cazier_judiciar"],"counters":2},
+    {"id":"O4","name":"Evidenta Populatiei","emits":["buletin","rezidenta","eID"],"counters":3},
+    {"id":"O5","name":"Pasapoarte","emits":["pasaport"],"counters":2},
+    {"id":"O6","name":"Directia Medicala","emits":["adeverinta_medicala"],"counters":2},
+    {"id":"O7","name":"Permise Auto","emits":["permis_conducere"],"counters":2},
+    {"id":"O8","name":"Asigurari","emits":["polita_asigurare"],"counters":2},
+    {"id":"O9","name":"Inmatriculari","emits":["inmatriculare_auto"],"counters":2},
+    {"id":"O10","name":"Casa Sociala","emits":["numar_asigurari_sociale"],"counters":1},
+    {"id":"O11","name":"Casa de Sanatate","emits":["asigurare_sanatate"],"counters":2}
   ],
-  "breaks": {"everySec":20, "minSec":5, "maxSec":10},
-  "clients": {"count":10, "targets":["pasaport"], "arrivalMs":{"min":0,"max":600}}
+  "breaks": { "everySec": 2, "minSec": 1, "maxSec": 3 },
+  "clients": {
+    "count": 30,
+    "targets": ["pasaport","permis_conducere","eID","inmatriculare_auto","asigurare_sanatate"]
+  }
 }

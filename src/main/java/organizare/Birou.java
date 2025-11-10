@@ -23,5 +23,8 @@ public class Birou {
             pool.submit(g);
         }
     }
-    public void inchide() { pool.shutdownNow(); }
+    public void inchide()
+    {
+        pool.shutdownNow();
+    }
 }

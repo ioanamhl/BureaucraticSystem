@@ -23,19 +23,14 @@ public class Client implements Runnable {
         try {
             while (!have.contains(tinta)) {
                 String next = urmatorulEligibil();
-                if (next == null)
-                {
-                    Thread.sleep(50);
-                    continue;
-                }
                 Birou b = doc2birou.get(next);
                 CountDownLatch gata = new CountDownLatch(1);
                 b.coada.add(new Cerere(id, next, gata));
-                gata.await();               // așteaptă să fie servit
+                gata.await();
                 have.add(next);
                 System.out.println(id + " a obținut " + next);
             }
-            System.out.println(id + " FINALIZAT tinta " + tinta);
+            System.out.println(id + " TERMINAT tinta " + tinta);
         } catch (InterruptedException e) { Thread.currentThread().interrupt(); }
     }
 

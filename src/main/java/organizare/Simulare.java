@@ -36,11 +36,8 @@ public class Simulare {
         }
 
         // clienți
-        //ExecutorService poolClienti = Executors.newCachedThreadPool();
-        ExecutorService poolClienti = Executors.newFixedThreadPool(5);
+        ExecutorService poolClienti = Executors.newCachedThreadPool();
         int n = cfg.clients.count;
-        //int min = cfg.clients.arrivalMs.min;
-        //int max = cfg.clients.arrivalMs.max;
         int min=0;
         int max=0;
         String[] targets = cfg.clients.targets;
@@ -54,7 +51,7 @@ public class Simulare {
         poolClienti.shutdown();
         poolClienti.awaitTermination(5, TimeUnit.MINUTES);
 
-        // oprire curată
+
         ps.stop();
         for (Birou b : birouri) b.inchide();
         System.out.println("Simulare terminată.");
